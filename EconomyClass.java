@@ -1,8 +1,8 @@
-public class FirstClass extends Seat {
+public class EconomyClass extends Seat {
+    
+  private double basePrice = 200.00;
   
-  private double basePrice = 500.00;
-  
-  public FirstClass(int row, int column){
+  public EconomyClass(int row, int column){
     this.row = row;
     this.column = column;
     this.price = calculatePrice(row, column);
@@ -25,7 +25,7 @@ public class FirstClass extends Seat {
   public double calculatePrice(int row, int column){
     double newPrice = 0.0;
     
-    if(row <= 2){
+    if(row <= 6){
       newPrice = basePrice + 50;
     }
     else
@@ -62,4 +62,5 @@ public class FirstClass extends Seat {
     }
     return id;
   } 
+  
 }

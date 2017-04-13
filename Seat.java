@@ -4,10 +4,12 @@ public abstract class Seat {
   protected int row, column;
   protected String seatID;
   
-  public int getPrice();
-  public boolean isBooked();
-  public void book();
-  public String toString();
-  public String getID();
+  public abstract double calculatePrice(int column, int row);
+  public abstract double getPrice();
+  public abstract int getRow();
+  public abstract int getColumn();
+  public abstract boolean isBooked();
+  public abstract void book();
+  public abstract String getID(int column, int row);
   
 }
