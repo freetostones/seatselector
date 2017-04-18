@@ -2,12 +2,13 @@ public class EconomyClass extends Seat {
     
   private double basePrice = 200.00;
   
-  public EconomyClass(int row, int column){
+  public EconomyClass(int row, int column, String flightID){
     this.row = row;
     this.column = column;
     this.price = calculatePrice(row, column);
     this.booked = false;
-    this.seatID = getID(row, column);
+    this.seatID = createSeatID(row, column);
+    this.flightID = flightID;
   }
   
   public int getRow(){
@@ -38,11 +39,12 @@ public class EconomyClass extends Seat {
     return this.booked;
   }
 
-  public void book(){
+  public void book(String userID){
+    this.userID = userID;
     this.booked = true;
   }
   
-  public String getID(int column, int row){
+  public String createSeatID(int column, int row){
     String id = "";
     int rowNum = row + 1;
     
@@ -62,5 +64,9 @@ public class EconomyClass extends Seat {
     }
     return id;
   } 
+  
+  public String getSeatID() {
+    return this.seatID;
+  }
   
 }
