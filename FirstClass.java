@@ -1,26 +1,15 @@
 public class FirstClass extends Seat {
-  
+ 
   private double basePrice = 500.00;
   
   public FirstClass(int row, int column, String flightID){
+    this.price = calculatePrice(row, column);
     this.row = row;
     this.column = column;
-    this.price = calculatePrice(row, column);
     this.booked = false;
     this.seatID = createSeatID(row, column);
     this.flightID = flightID;
-  }
-  
-  public int getRow(){
-    return this.row;
-  }
-    
-  public int getColumn(){
-    return this.column;
-  }
-  
-  public double getPrice(){
-    return this.price;
+    this.userID = "";
   }
   
   public double calculatePrice(int row, int column){
@@ -33,6 +22,18 @@ public class FirstClass extends Seat {
       newPrice = basePrice;
     
     return newPrice;
+  }
+  
+  public double getPrice(){
+    return this.price;
+  }
+  
+  public int getRow(){
+    return this.row;
+  }
+    
+  public int getColumn(){
+    return this.column;
   }
   
   public boolean isBooked(){
@@ -68,4 +69,13 @@ public class FirstClass extends Seat {
   public String getSeatID() {
     return this.seatID;
   }
+  
+  public String getFlightID(){
+    return this.flightID;
+  }
+  
+  public String getUserID(){
+    return this.userID;
+  }
+  
 }

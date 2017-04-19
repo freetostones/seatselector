@@ -1,7 +1,7 @@
 public abstract class Seat {
   protected double price;
-  protected boolean booked;
   protected int row, column;
+  protected boolean booked;
   protected String seatID;
   protected String flightID; 
   protected String userID;
@@ -14,6 +14,6 @@ public abstract class Seat {
   public abstract void book(String userID);
   public abstract String createSeatID(int column, int row);
   public abstract String getSeatID();
-  
-  
+  public abstract String getFlightID();
+  public abstract String getUserID();
 }
