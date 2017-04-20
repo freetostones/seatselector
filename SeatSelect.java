@@ -1,6 +1,23 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 public class SeatSelect {
   public static void main(String[] args){
+  
+    SeatSelectFrame myFrame = new SeatSelectFrame();
+
+    myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    myFrame.pack();
+    myFrame.setVisible(true);
     
+        
     User user1 = new User("Bob", "Smith", "Bob101", "password");
     
     Flight flight1 = new Flight ("Chicago", "Los Angeles");
