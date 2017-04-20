@@ -38,8 +38,9 @@ public class User {
     
     public void printSeats(){
       for(int i = 0; i < this.bookedSeatsArray.size(); i++){
-        System.out.println(this.bookedSeatsArray.get(i).getSeatID());
+        System.out.print(this.bookedSeatsArray.get(i).getSeatID() + " ");
        }
+      System.out.print("\n");
     } 
   
 }
