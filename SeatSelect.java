@@ -16,7 +16,7 @@ public class SeatSelect {
     System.out.println("Flight's Departure: " + selectedFlight.getFrom());
     System.out.println("Flight's Destination: " + selectedFlight.getTo() + "\n");
     
-    Seat selectedSeat = selectedFlight.getSeat("D1");
+    Seat selectedSeat = selectedFlight.getSeat("1A");
     System.out.println("Seat's Flight ID: " + selectedSeat.getFlightID());
     System.out.println("Seat's Seat ID: " + selectedSeat.getSeatID());
     System.out.println("Seat's Row: " + selectedSeat.getRow());

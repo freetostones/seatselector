@@ -47,20 +47,20 @@ public class EconomyClass extends Seat {
   
   public String createSeatID(int column, int row){
     String id = "";
-    int rowNum = row + 1;
+    int colNum = column + 1;
     
-    switch(column){
-      case 0: id = this.seatID = "A" + rowNum;
+    switch(row){
+      case 0: id = this.seatID = colNum + "A";
               break;
-      case 1: id = this.seatID = "B" + rowNum;
+      case 1: id = this.seatID = colNum + "B";
               break;
-      case 2: id = this.seatID = "C" + rowNum;
+      case 2: id = this.seatID = colNum + "C";
               break;
-      case 3: id = this.seatID = "D" + rowNum;
+      case 3: id = this.seatID = colNum + "D";
               break;
-      case 4: id = this.seatID = "E" + rowNum;
+      case 4: id = this.seatID = colNum + "E";
               break;
-      case 5: id = this.seatID = "F" + rowNum;
+      case 5: id = this.seatID = colNum + "F";
               break;
     }
     return id;
