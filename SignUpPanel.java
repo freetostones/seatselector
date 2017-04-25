@@ -20,7 +20,7 @@ public class SignUpPanel extends JPanel
    private JTextField lastNameField; // Displays last name
    private JTextField userNameField; // Displays user name
    private JTextField passwordField; // Displays password
-   private JButton signUpButton;   // Triggers sign up
+   //private JButton signUpButton;   // Triggers sign up
    
    private SeatSelectFrame frame;
 
@@ -50,7 +50,7 @@ public class SignUpPanel extends JPanel
       passwordField.setEditable(true);
 
       // Create a "Calculate" button
-      signUpButton = new JButton("Sign Up");
+      //signUpButton = new JButton("Sign Up");
       
       // Use a GridBagLayout
       setLayout(new GridBagLayout());
@@ -104,7 +104,7 @@ public class SignUpPanel extends JPanel
       positionConst.gridx = 0;
       positionConst.gridy = 5;
       positionConst.insets = new Insets(10, 10, 10, 10);
-      add(signUpButton, positionConst);
+      //add(signUpButton, positionConst);
       
       class ButtonListener implements ActionListener
       {
@@ -126,15 +126,22 @@ public class SignUpPanel extends JPanel
            passwordLabel.setVisible(false);
       
 
-           frame.createUser(firstNameInput, lastNameInput, userNameInput, passwordInput);
+           //frame.createUser(firstNameInput, lastNameInput, userNameInput, passwordInput);
            
-           frame.bookSeat("1");
+           //frame.bookSeat("1");
 
 
            return;
         }
       }
       ActionListener listener = new ButtonListener();
-      signUpButton.addActionListener(listener); 
+      //signUpButton.addActionListener(listener); 
+   }
+   
+   public void clear(){
+     firstNameField.setText("");
+     lastNameField.setText("");
+     userNameField.setText("");
+     passwordField.setText("");
    }
 }

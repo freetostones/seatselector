@@ -11,16 +11,15 @@ import javax.swing.JTextField;
 public class SeatSelect {
   public static void main(String[] args){
   
-        
     User user1 = new User("Bob", "Smith", "Bob101", "password");
   
     SeatSelectFrame myFrame = new SeatSelectFrame();
 
     myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     myFrame.pack();
+    myFrame.setSize(350,310);
     myFrame.setVisible(true);
    
-    
     Flight flight1 = new Flight ("Chicago", "Los Angeles");
     
     User currentUser = user1;

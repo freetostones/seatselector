@@ -4,27 +4,23 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class SignInPanel extends JPanel
+public class SeatsPanel extends JPanel
 {
    private JLabel userNameLabel;      // Label for user name
    private JLabel passwordLabel;      // Label for user name
    private JTextField userNameField; // Displays user name
    private JTextField passwordField; // Displays password
    //private JButton signInButton;   // Triggers sign in
-   //private JButton signUpButton;   // Sends to sign up page
 
-   private SeatSelectFrame frame;
 
-   public SignInPanel(SeatSelectFrame frame)
+   public SeatsPanel(SeatSelectFrame frame)
    {
-      this.frame = frame;
-      
       // Used to specify GUI component layout
       GridBagConstraints positionConst = null;
 
       // Set hourly and yearly salary labels
-      userNameLabel = new JLabel("User Name:");
-      passwordLabel = new JLabel("Password:");
+      userNameLabel = new JLabel("SEATS:");
+      passwordLabel = new JLabel("TIME:");
       
       userNameField = new JTextField(15);
       userNameField.setEditable(true);
@@ -32,10 +28,8 @@ public class SignInPanel extends JPanel
       passwordField = new JTextField(15);
       passwordField.setEditable(true);
 
-      // Create a "Sign In" button
+      // Create a "Calculate" button
       //signInButton = new JButton("Sign In");
-      
-      //signUpButton = new JButton("Sign Up");
       
       // Use a GridBagLayout
       setLayout(new GridBagLayout());
@@ -66,15 +60,10 @@ public class SignInPanel extends JPanel
       positionConst.insets = new Insets(10, 10, 10, 10);
       add(passwordField, positionConst);
 
-      //positionConst.gridx = 0;
-      //positionConst.gridy = 3;
-      //positionConst.insets = new Insets(10, 10, 10, 10);
+      positionConst.gridx = 0;
+      positionConst.gridy = 3;
+      positionConst.insets = new Insets(10, 10, 10, 10);
       //add(signInButton, positionConst);
-      
-      //positionConst.gridx = 1;
-      //positionConst.gridy = 3;
-      //positionConst.insets = new Insets(10, 10, 10, 10);
-      //add(signUpButton, positionConst);
       
       class ButtonListener implements ActionListener
       {
@@ -86,18 +75,13 @@ public class SignInPanel extends JPanel
            userNameInput = userNameField.getText();
            passwordInput = passwordField.getText();
       
-           
+           userNameLabel.setVisible(false);
+           passwordLabel.setVisible(false);
 
            return;
         }
       }
-      //ActionListener listener = new ButtonListener();
+      ActionListener listener = new ButtonListener();
       //signInButton.addActionListener(listener); 
-     
    }
-   
-     public void clear(){
-        userNameField.setText("");
-        passwordField.setText("");
-      }
 }

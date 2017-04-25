@@ -10,17 +10,17 @@ public class FlightsPanel extends JPanel
    private JLabel passwordLabel;      // Label for user name
    private JTextField userNameField; // Displays user name
    private JTextField passwordField; // Displays password
-   private JButton signInButton;   // Triggers sign in
+   //private JButton signInButton;   // Triggers sign in
 
 
-   public FlightsPanel()
+   public FlightsPanel(SeatSelectFrame frame)
    {
       // Used to specify GUI component layout
       GridBagConstraints positionConst = null;
 
       // Set hourly and yearly salary labels
-      userNameLabel = new JLabel("User Name:");
-      passwordLabel = new JLabel("Password:");
+      userNameLabel = new JLabel("FLIGHT:");
+      passwordLabel = new JLabel("TIME:");
       
       userNameField = new JTextField(15);
       userNameField.setEditable(true);
@@ -29,7 +29,7 @@ public class FlightsPanel extends JPanel
       passwordField.setEditable(true);
 
       // Create a "Calculate" button
-      signInButton = new JButton("Sign In");
+      //signInButton = new JButton("Sign In");
       
       // Use a GridBagLayout
       setLayout(new GridBagLayout());
@@ -63,7 +63,7 @@ public class FlightsPanel extends JPanel
       positionConst.gridx = 0;
       positionConst.gridy = 3;
       positionConst.insets = new Insets(10, 10, 10, 10);
-      add(signInButton, positionConst);
+      //add(signInButton, positionConst);
       
       class ButtonListener implements ActionListener
       {
@@ -82,6 +82,6 @@ public class FlightsPanel extends JPanel
         }
       }
       ActionListener listener = new ButtonListener();
-      signInButton.addActionListener(listener); 
+      //signInButton.addActionListener(listener); 
    }
 }
