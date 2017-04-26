@@ -287,6 +287,11 @@ public class SeatSelectFrame extends JFrame{
             back2.setVisible(false);
             home.setVisible(false);
             panel.add(homePanel, BorderLayout.CENTER);
+            
+            ArrayList<String> array = seatsPanel.getSelectedSeats();
+            for(int i = 0; i < array.size(); i++){
+               System.out.println(array.get(i));
+            }
           }
           validate();
           repaint();
