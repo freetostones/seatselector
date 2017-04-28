@@ -274,6 +274,7 @@ public class SeatSelectFrame extends JFrame{
             back1.setVisible(false);
             back2.setVisible(true);
             home.setVisible(true);
+            System.out.println(getSelectedFlight().getFlightID());
             panel.add(seatsPanel, BorderLayout.CENTER);
           }
           else if(event.getSource() == back1){
@@ -295,7 +296,7 @@ public class SeatSelectFrame extends JFrame{
           else if(event.getSource() == back2){
             panel.remove(signUpPanel);
             panel.remove(signInPanel);
-            panel.remove(flightsPanel);
+            panel.remove(homePanel);
             panel.remove(seatsPanel);
             signInButton.setVisible(false);
             signUpButton1.setVisible(false);
@@ -306,7 +307,7 @@ public class SeatSelectFrame extends JFrame{
             back1.setVisible(true);
             back2.setVisible(false);
             home.setVisible(false);
-            panel.add(homePanel, BorderLayout.CENTER);
+            panel.add(flightsPanel, BorderLayout.CENTER);
           }
           else if(event.getSource() == home){
             panel.remove(signUpPanel);

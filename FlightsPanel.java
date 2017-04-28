@@ -28,6 +28,7 @@ public class FlightsPanel extends JPanel
            String[] stringArray = (String[]) cBox.getSelectedItem();
            selectFlight(stringArray[0]);
            System.out.println(stringArray[0]);
+           
          }
        }
      });
@@ -72,6 +73,8 @@ public class FlightsPanel extends JPanel
       frame.selectFlight(flightID);
       return;
    }
+   
+   
    
 }
      
