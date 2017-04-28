@@ -20,7 +20,7 @@ public class SeatSelect {
     myFrame.setSize(700,500);
     myFrame.setVisible(true);
    
-    Flight flight1 = new Flight ("Chicago", "Los Angeles");
+    //Flight flight1 = new Flight ("Chicago", "Los Angeles");
     
     User currentUser = user1;
 //     System.out.println("User's First Name: " + currentUser.getFirstName());

@@ -19,7 +19,7 @@ public class SeatSelectFrame extends JFrame{
    private ArrayList<User> usersArray;
    private User currentUser;
    private User testUser;
-   private Flight selectedFlight;
+   private Flight selectedFlight, flight2, flight3;
    private Flight testFlight;
    private Seat selectedSeat;
    private JPanel panel, buttons;
@@ -44,13 +44,15 @@ public class SeatSelectFrame extends JFrame{
       setCurrentUser(this.testUser);
       
       this.flightsArray = new ArrayList<Flight>();
-      this.testFlight = new Flight ("Chicago", "Los Angeles");
+      this.testFlight = new Flight ("New York City", "Chicago", "12/12/12", "11:00 AM");
       this.flightsArray.add(testFlight);
-      selectFlight("1122");
+      selectFlight("3311");
       
-      this.flightsArray = new ArrayList<Flight>();
-      Flight flight = new Flight ("Chicago", "Los Angeles");
-      flightsArray.add(flight);
+      this.flight2 = new Flight ("Chicago", "New York City", "11/11/11", "12:00 PM");
+      this.flightsArray.add(flight2);
+      
+      this.flight3 = new Flight ("Los Angeles", "New York City", "10/10/10", "1:00 PM");
+      this.flightsArray.add(flight3);
       
       // Create a "Sign In" button
       signInButton = new JButton("Sign In");

@@ -1,11 +1,14 @@
 public class Flight {
   
-  private String flightID, from, to;
+  private String flightID, from, to, date, time;
   private Seat[][] seatsArray;
   
-  public Flight(String from, String to){
+  public Flight(String from, String to, String date, String time){
     this.from = from;
     this.to = to;
+    this.date = date;
+    this.time = time;
+    
     this.flightID = calculateFlightID(from, to);
     
     Seat[][] a = new Seat[8][6];
@@ -39,13 +42,13 @@ public class Flight {
     }
     
     if (destination.equals("chicago")) {
-      id = this.flightID += 11;
+      id = this.flightID.concat("11");
     }
     else if (destination.equals("los angeles")) {
-      id = this.flightID += 22;
+      id = this.flightID.concat("22");
     }
     else if (destination.equals("new york city")) {
-      id = this.flightID += 33;
+      id = this.flightID.concat("33");
     }
         
     return id;
@@ -61,6 +64,14 @@ public class Flight {
   
   public String getTo(){
     return this.to;
+  }
+  
+  public String getDate(){
+    return this.date;
+  }
+    
+  public String getTime(){
+    return this.time;
   }
   
   public Seat getSeat(String id) {
