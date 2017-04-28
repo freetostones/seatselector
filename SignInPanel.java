@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import java.util.ArrayList;
 
 public class SignInPanel extends JPanel
 {
@@ -10,8 +11,7 @@ public class SignInPanel extends JPanel
    private JLabel passwordLabel;      // Label for user name
    private JTextField userNameField; // Displays user name
    private JTextField passwordField; // Displays password
-   //private JButton signInButton;   // Triggers sign in
-   //private JButton signUpButton;   // Sends to sign up page
+
 
    private SeatSelectFrame frame;
 
@@ -31,11 +31,6 @@ public class SignInPanel extends JPanel
       
       passwordField = new JTextField(15);
       passwordField.setEditable(true);
-
-      // Create a "Sign In" button
-      //signInButton = new JButton("Sign In");
-      
-      //signUpButton = new JButton("Sign Up");
       
       // Use a GridBagLayout
       setLayout(new GridBagLayout());
@@ -65,39 +60,27 @@ public class SignInPanel extends JPanel
       positionConst.gridy = 1;
       positionConst.insets = new Insets(10, 10, 10, 10);
       add(passwordField, positionConst);
-
-      //positionConst.gridx = 0;
-      //positionConst.gridy = 3;
-      //positionConst.insets = new Insets(10, 10, 10, 10);
-      //add(signInButton, positionConst);
-      
-      //positionConst.gridx = 1;
-      //positionConst.gridy = 3;
-      //positionConst.insets = new Insets(10, 10, 10, 10);
-      //add(signUpButton, positionConst);
-      
-      class ButtonListener implements ActionListener
-      {
-        public void actionPerformed(ActionEvent event)
-        {
-           String userNameInput = ""; 
-           String passwordInput = ""; 
-
-           userNameInput = userNameField.getText();
-           passwordInput = passwordField.getText();
-      
            
-
-           return;
-        }
-      }
-      //ActionListener listener = new ButtonListener();
-      //signInButton.addActionListener(listener); 
-     
    }
    
      public void clear(){
         userNameField.setText("");
         passwordField.setText("");
       }
+      
+     public void signIn(){ 
+        ArrayList<User> array = new ArrayList<User>();
+        array = frame.getUsersArray();
+        for(int i = 0; i < array.size(); i++){
+         if(userNameField.getText() == array.get(i).getUserID()) {
+            if(passwordField.getText() == array.get(i).getPassword()) {
+            frame.setCurrentUser(array.get(i));
+            }
+         }
+         else {
+            System.out.println("Username does not exist");
+         }
+      }
+      return;
+     }
 }

@@ -7,8 +7,10 @@ import java.util.ArrayList;
 
 public class SeatsPanel extends JPanel
 {
+   private SeatSelectFrame frame;
    public SeatsPanel(SeatSelectFrame frame)
    { 
+      this.frame = frame;
       GridBagConstraints positionConst = null;
       setLayout(new GridBagLayout());
       positionConst = new GridBagConstraints();
@@ -58,17 +60,41 @@ public class SeatsPanel extends JPanel
           return id;
         } 
         
-         public ArrayList<String> getSelectedSeats() {
-            ArrayList<Component> components = new ArrayList<Component>();
-            components = this.getComponents; 
-            // Component[] components = this.getComponents();
+         public ArrayList<String> getSelectedSeats() { 
+            Component[] components = this.getComponents();
             ArrayList<String> array = new ArrayList<String>();
-                  for (int i = 0; i < components.size(); i++) {
-                    // JCheckBox cb = (JCheckBox) components[i];
-                    JCheckBox cb = (JCheckBox) components.get(i);
-                    if (cb.isSelected())
-                        array.add(cb.getName());
+                  for (int i = 0; i < components.length; i++) {
+                    JCheckBox cb = (JCheckBox) components[i];
+                    if (cb.isSelected()) {
+                        array.add(cb.getText());
+                        cb.setEnabled(false);
+                        }
                   }
                   return array;
+         }
+         
+         public void bookSeats() { 
+            Component[] components = this.getComponents();
+            ArrayList<String> array = new ArrayList<String>();
+                  for (int i = 0; i < components.length; i++) {
+                    JCheckBox cb = (JCheckBox) components[i];
+                    if (cb.isSelected()) {
+                        frame.getSelectedFlight().getSeat(cb.getText()).book(frame.getCurrentUser().getUserID());
+                        cb.setEnabled(false);
+                        }
+                  }
+                  return;
+         }
+         
+         public void updatePanel() {
+            Component[] components = this.getComponents();
+            ArrayList<String> array = new ArrayList<String>();
+                  for (int i = 0; i < components.length; i++) {
+                    JCheckBox cb = (JCheckBox) components[i];
+                    if (frame.getSelectedFlight().getSeat(cb.getText()).isBooked()) {
+                        cb.setEnabled(false);
+                    }
+                  }
+                  return;
          }
 }

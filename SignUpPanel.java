@@ -9,6 +9,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import java.util.ArrayList;
 
 public class SignUpPanel extends JPanel
 {
@@ -103,39 +104,7 @@ public class SignUpPanel extends JPanel
 
       positionConst.gridx = 0;
       positionConst.gridy = 5;
-      positionConst.insets = new Insets(10, 10, 10, 10);
-      //add(signUpButton, positionConst);
-      
-      class ButtonListener implements ActionListener
-      {
-        public void actionPerformed(ActionEvent event)
-        {
-           String firstNameInput = ""; 
-           String lastNameInput = ""; 
-           String userNameInput = ""; 
-           String passwordInput = ""; 
-
-           firstNameInput = firstNameField.getText();
-           lastNameInput = lastNameField.getText();
-           userNameInput = userNameField.getText();
-           passwordInput = passwordField.getText();
-      
-           firstNameLabel.setVisible(false);
-           lastNameLabel.setVisible(false);
-           userNameLabel.setVisible(false);
-           passwordLabel.setVisible(false);
-      
-
-           //frame.createUser(firstNameInput, lastNameInput, userNameInput, passwordInput);
-           
-           //frame.bookSeat("1");
-
-
-           return;
-        }
-      }
-      ActionListener listener = new ButtonListener();
-      //signUpButton.addActionListener(listener); 
+      positionConst.insets = new Insets(10, 10, 10, 10); 
    }
    
    public void clear(){
@@ -143,5 +112,17 @@ public class SignUpPanel extends JPanel
      lastNameField.setText("");
      userNameField.setText("");
      passwordField.setText("");
+   }
+   
+   public void createUser() {
+      ArrayList<User> array = new ArrayList<User>();
+      array = frame.getUsersArray();
+      String firstName = firstNameField.getText();
+      String lastName = lastNameField.getText();
+      String userName = userNameField.getText();
+      String password = passwordField.getText();
+      User user = new User(firstName, lastName, userName, password);
+      array.add(user);
+      return;
    }
 }

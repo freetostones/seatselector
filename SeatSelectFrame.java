@@ -18,7 +18,9 @@ public class SeatSelectFrame extends JFrame{
    private ArrayList<Flight> flightsArray;
    private ArrayList<User> usersArray;
    private User currentUser;
+   private User testUser;
    private Flight selectedFlight;
+   private Flight testFlight;
    private Seat selectedSeat;
    private JPanel panel, buttons;
    private SignInPanel signInPanel;
@@ -37,6 +39,14 @@ public class SeatSelectFrame extends JFrame{
       setTitle("Seat Selector");
      
       this.usersArray = new ArrayList<User>();
+      this.testUser = new User("Test", "User", "testuser", "password");
+      this.usersArray.add(testUser);
+      setCurrentUser(this.testUser);
+      
+      this.flightsArray = new ArrayList<Flight>();
+      this.testFlight = new Flight ("Chicago", "Los Angeles");
+      this.flightsArray.add(testFlight);
+      selectFlight("1122");
       
       this.flightsArray = new ArrayList<Flight>();
       Flight flight = new Flight ("Chicago", "Los Angeles");
@@ -101,25 +111,48 @@ public class SeatSelectFrame extends JFrame{
       homePanel = new HomePanel(this);
    }
 
-   public void createUser(String firstName, String lastName, String userName, String password) {
-      User user = new User(firstName, lastName, userName, password);
-      usersArray.add(user);
-       for(int i = 0; i < usersArray.size(); i++){
-         System.out.print(usersArray.get(i).getFirstName() + " ");
-      }
+  //  public void createUser(String firstName, String lastName, String userName, String password) {
+//       User user = new User(firstName, lastName, userName, password);
+//       usersArray.add(user);
+//        for(int i = 0; i < usersArray.size(); i++){
+//          System.out.print(usersArray.get(i).getFirstName() + " ");
+//       }
+//    
+//       return;
+//    }
    
+   public ArrayList<User> getUsersArray() {
+      return this.usersArray;
+   }
+   
+   public void setCurrentUser(String userID) {
+       for(int i = 0; i < usersArray.size(); i++){
+         if(userID == usersArray.get(i).getUserID()) {
+            this.currentUser = usersArray.get(i);
+         }
+      }
+      return;
+   }
+   
+   public User getCurrentUser() {
+      return this.currentUser;
+   }
+   
+   public void setCurrentUser(User user) {
+      this.currentUser = user;
       return;
    }
    
    public void selectFlight(String flightID) {
       for(int i = 0; i < flightsArray.size(); i++){
-         if(flightID == flightsArray.get(i).getFlightID()) {
+         if(flightID.equals(flightsArray.get(i).getFlightID())) {
             this.selectedFlight = flightsArray.get(i);
          }
       }
       return;
    }
    
+
    public Flight getSelectedFlight() {
       return this.selectedFlight;
    }
@@ -156,6 +189,7 @@ public class SeatSelectFrame extends JFrame{
             back1.setVisible(false);
             back2.setVisible(false);
             home.setVisible(false);
+            signInPanel.signIn();
             signInPanel.clear();
           }
           else if (event.getSource() == signUpButton1){
@@ -288,10 +322,18 @@ public class SeatSelectFrame extends JFrame{
             home.setVisible(false);
             panel.add(homePanel, BorderLayout.CENTER);
             
-            ArrayList<String> array = seatsPanel.getSelectedSeats();
-            for(int i = 0; i < array.size(); i++){
-               System.out.println(array.get(i));
-            }
+            seatsPanel.bookSeats();
+            seatsPanel.updatePanel();
+//            ArrayList<String> array = seatsPanel.getSelectedSeats();
+//            for(int i = 0; i < array.size(); i++){
+//               System.out.println(array.get(i));
+              //  Flight flight = getSelectedFlight();
+//                Seat seat = flight.getSeat(array.get(i));
+//                seat.book(currentUser.getUserID());
+//            }
+            
+            
+            
           }
           validate();
           repaint();

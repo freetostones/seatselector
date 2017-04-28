@@ -6,7 +6,7 @@ import javax.swing.border.LineBorder;
 
 public class HomePanel extends JPanel
 {
-   private JLabel userNameLabel;      // Label for user name
+   private JLabel nameLabel;      // Label for user name
    private JLabel passwordLabel;      // Label for user name
    private JTextField userNameField; // Displays user name
    private JTextField passwordField; // Displays password
@@ -19,14 +19,7 @@ public class HomePanel extends JPanel
       GridBagConstraints positionConst = null;
 
       // Set hourly and yearly salary labels
-      userNameLabel = new JLabel("HOME:");
-      passwordLabel = new JLabel("TIME:");
-      
-      userNameField = new JTextField(15);
-      userNameField.setEditable(true);
-      
-      passwordField = new JTextField(15);
-      passwordField.setEditable(true);
+      nameLabel = new JLabel("Hello: " + frame.getCurrentUser().getFirstName());
 
       // Create a "Calculate" button
       //signInButton = new JButton("Sign In");
@@ -43,45 +36,13 @@ public class HomePanel extends JPanel
       positionConst.insets = new Insets(10, 10, 10, 10);
       
       // Add component using the specified constraints
-      add(userNameLabel, positionConst);
+      add(nameLabel, positionConst);
 
-      positionConst.gridx = 1;
-      positionConst.gridy = 0;
-      positionConst.insets = new Insets(10, 10, 10, 10);
-      add(userNameField, positionConst);
-
-      positionConst.gridx = 0;
-      positionConst.gridy = 1;
-      positionConst.insets = new Insets(10, 10, 10, 10);
-      add(passwordLabel, positionConst);
-
-      positionConst.gridx = 1;
-      positionConst.gridy = 1;
-      positionConst.insets = new Insets(10, 10, 10, 10);
-      add(passwordField, positionConst);
-
-      positionConst.gridx = 0;
-      positionConst.gridy = 3;
-      positionConst.insets = new Insets(10, 10, 10, 10);
-      //add(signInButton, positionConst);
-      
-      class ButtonListener implements ActionListener
-      {
-        public void actionPerformed(ActionEvent event)
-        {
-           String userNameInput = ""; 
-           String passwordInput = ""; 
-
-           userNameInput = userNameField.getText();
-           passwordInput = passwordField.getText();
-      
-           userNameLabel.setVisible(false);
-           passwordLabel.setVisible(false);
-
-           return;
-        }
-      }
-      ActionListener listener = new ButtonListener();
-      //signInButton.addActionListener(listener); 
+//       positionConst.gridx = 1;
+//       positionConst.gridy = 0;
+//       positionConst.insets = new Insets(10, 10, 10, 10);
+//       add(nameField, positionConst);
    }
+   
+   
 }

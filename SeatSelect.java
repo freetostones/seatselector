@@ -17,7 +17,7 @@ public class SeatSelect {
 
     myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     myFrame.pack();
-    myFrame.setSize(350,310);
+    myFrame.setSize(700,500);
     myFrame.setVisible(true);
    
     Flight flight1 = new Flight ("Chicago", "Los Angeles");
