@@ -13,13 +13,13 @@ If you are using some sort of Java IDE (jGrasp, Eclipse, etc.), just  `git clone
 If you are using the command line to run this project, first `git clone` the repository and then I'm pretty sure you run 
 
 ```
-java App.java
+javac App.java
 ```
 
 to compile the files, and then 
 
 ```
-javac App.java
+java App.java
 ```
 
 to run the project.
