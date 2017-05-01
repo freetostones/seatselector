@@ -69,24 +69,24 @@ public class FlightsPanel extends JPanel
 }
      
    class MyRenderer extends JPanel implements ListCellRenderer
-{
-  JLabel[] label = new JLabel[5];
-  public MyRenderer()
-  {
-    setLayout(new GridLayout(0,5));
-    for(int x = 0; x < label.length; x++)
-    {
-      label[x] = new JLabel();
-      add(label[x]);
-    }
-  }
-  public Component getListCellRendererComponent(JList list, Object value,
+   {
+     JLabel[] label = new JLabel[5];
+     public MyRenderer()
+     {
+       setLayout(new GridLayout(0,5));
+       for(int x = 0; x < label.length; x++)
+       {
+         label[x] = new JLabel();
+         add(label[x]);
+       }
+     }
+     public Component getListCellRendererComponent(JList list, Object value,
                       int index, boolean isSelected, boolean cellHasFocus)
-  {
-    for(int x = 0; x < label.length; x++)
-    {
-      label[x].setText((String)((String[])value)[x]);
-    }
-    return this;
-  }
-}
+     {
+       for(int x = 0; x < label.length; x++)
+       {
+         label[x].setText((String)((String[])value)[x]);
+       }
+       return this;
+     }
+   }

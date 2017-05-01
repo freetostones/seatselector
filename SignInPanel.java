@@ -61,10 +61,12 @@ public class SignInPanel extends JPanel
         array = frame.getUsersArray();
        
         for(int i = 1; i < array.size(); i++){
-          if(checkSignIn() == true){
-           frame.setCurrentUser(array.get(i));
-          }
+          if(userNameField.getText().equals(array.get(i).getUserID())) {
+            if(passwordField.getText().equals(array.get(i).getPassword())) {
+              frame.setCurrentUser(array.get(i));
+            }
           return;
+          }
         }
      }
      
