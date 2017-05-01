@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-public class SeatSelect {
+public class App {
   public static void main(String[] args){
 
     SeatSelectFrame myFrame = new SeatSelectFrame();
