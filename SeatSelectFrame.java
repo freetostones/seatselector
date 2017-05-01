@@ -18,34 +18,33 @@ public class SeatSelectFrame extends JFrame{
    private ArrayList<Flight> flightsArray;
    private ArrayList<User> usersArray;
    private User currentUser;
-   private User testUser;
-   private Flight selectedFlight, flight2, flight3;
-   private Flight testFlight;
+   private User temporaryUser;
+   private Flight selectedFlight, flight1, flight2, flight3;
    private Seat selectedSeat;
    private JPanel panel, buttons;
    private SignInPanel signInPanel;
    private SignUpPanel signUpPanel;
    private FlightsPanel flightsPanel;
-   private SeatsPanel seatsPanel;
+   private SeatsPanel seatsPanel1;
+   private SeatsPanel seatsPanel2;
+   private SeatsPanel seatsPanel3;
    private HomePanel homePanel;
-   private JButton signInButton, signUpButton1, signUpButton2, signOutButton;   // Sends to sign up page
-   private JButton flightsButton, seatsButton, back1, back2, home;   // Sends to sign up page
+   private UserPanel userPanel;
+   private JButton signInButton, signUpButton1, signUpButton2, signOutButton;
+   private JButton flightsButton, seatsButton, back1, back2, home1, home2, home3, quit;
+   private JFrame frame;
    
    SeatSelectFrame() {
-      // Used to specify GUI component layout
-      GridBagConstraints positionConst = null;
-      
-      // Set frame's title
       setTitle("Seat Selector");
      
       this.usersArray = new ArrayList<User>();
-      this.testUser = new User("Test", "User", "testuser", "password");
-      this.usersArray.add(testUser);
-      setCurrentUser(this.testUser);
+      this.temporaryUser = new User("Temporary", "User", "temporary.user", "password");
+      this.usersArray.add(temporaryUser);
+      setCurrentUser(this.temporaryUser);
       
       this.flightsArray = new ArrayList<Flight>();
-      this.testFlight = new Flight ("New York City", "Chicago", "12/12/12", "11:00 AM");
-      this.flightsArray.add(testFlight);
+      this.flight1 = new Flight ("New York City", "Chicago", "12/12/12", "11:00 AM");
+      this.flightsArray.add(flight1);
       selectFlight("3311");
       
       this.flight2 = new Flight ("Chicago", "New York City", "11/11/11", "12:00 PM");
@@ -54,16 +53,20 @@ public class SeatSelectFrame extends JFrame{
       this.flight3 = new Flight ("Los Angeles", "New York City", "10/10/10", "1:00 PM");
       this.flightsArray.add(flight3);
       
-      // Create a "Sign In" button
       signInButton = new JButton("Sign In");
       signUpButton1 = new JButton("Sign Up");
       signUpButton2 = new JButton("Sign Up");
       signOutButton = new JButton("Sign Out");
       flightsButton = new JButton("Select a Flight");
       seatsButton = new JButton("Select a Seat");
-      back1 = new JButton("Back1");
-      back2 = new JButton("Back2");
-      home = new JButton("Book Seats");
+      back1 = new JButton("Back");
+      back2 = new JButton("Back");
+      home1 = new JButton("Book Seats");
+      home2 = new JButton("Book Seats");
+      home3 = new JButton("Book Seats");
+      quit = new JButton("Quit");
+      
+      frame = new JFrame();
       
       ActionListener listener = new ButtonListener();
       
@@ -75,10 +78,14 @@ public class SeatSelectFrame extends JFrame{
       seatsButton.addActionListener(listener);
       back1.addActionListener(listener);
       back2.addActionListener(listener);
-      home.addActionListener(listener);
-      
+      home1.addActionListener(listener);
+      home2.addActionListener(listener);
+      home3.addActionListener(listener);
+      quit.addActionListener(listener);
+        
       buttons = new JPanel();
       
+      buttons.add(quit);
       buttons.add(signInButton);
       buttons.add(signUpButton1);
       buttons.add(signUpButton2);
@@ -87,7 +94,9 @@ public class SeatSelectFrame extends JFrame{
       buttons.add(flightsButton);
       buttons.add(back2);
       buttons.add(seatsButton);
-      buttons.add(home);
+      buttons.add(home1);
+      buttons.add(home2);
+      buttons.add(home3);
       
       signUpButton2.setVisible(false);
       signOutButton.setVisible(false);
@@ -95,7 +104,10 @@ public class SeatSelectFrame extends JFrame{
       seatsButton.setVisible(false);
       back1.setVisible(false);
       back2.setVisible(false);
-      home.setVisible(false);
+      home1.setVisible(false);
+      home2.setVisible(false);
+      home3.setVisible(false);
+      quit.setVisible(false);
         
       panel = new JPanel();
       panel.setLayout(new BorderLayout());
@@ -109,32 +121,28 @@ public class SeatSelectFrame extends JFrame{
  
       signUpPanel = new SignUpPanel(this);
       flightsPanel = new FlightsPanel(this);
-      seatsPanel = new SeatsPanel(this);
+      seatsPanel1 = new SeatsPanel(this);
+      seatsPanel2 = new SeatsPanel(this);
+      seatsPanel3 = new SeatsPanel(this);
       homePanel = new HomePanel(this);
+      userPanel = new UserPanel(this);
+      
+      homePanel.add(userPanel);
    }
 
-  //  public void createUser(String firstName, String lastName, String userName, String password) {
-//       User user = new User(firstName, lastName, userName, password);
-//       usersArray.add(user);
-//        for(int i = 0; i < usersArray.size(); i++){
-//          System.out.print(usersArray.get(i).getFirstName() + " ");
-//       }
-//    
-//       return;
-//    }
-   
    public ArrayList<User> getUsersArray() {
       return this.usersArray;
    }
    
    public void setCurrentUser(String userID) {
        for(int i = 0; i < usersArray.size(); i++){
-         if(userID == usersArray.get(i).getUserID()) {
+         if(userID.equals(usersArray.get(i).getUserID())) {
             this.currentUser = usersArray.get(i);
          }
       }
       return;
    }
+   
    
    public User getCurrentUser() {
       return this.currentUser;
@@ -172,15 +180,27 @@ public class SeatSelectFrame extends JFrame{
       return;
    }
    
+   public void updateUserPanel(){
+     homePanel.remove(userPanel);
+     userPanel = new UserPanel(this);
+     homePanel.add(userPanel);
+   }       
+   
+   public ArrayList<Flight> getFlightsArray() {
+      return this.flightsArray;
+   }
+   
    class ButtonListener implements ActionListener
       {
         public void actionPerformed(ActionEvent event)
         {
-          if (event.getSource() == signInButton) {
+          if (event.getSource() == signInButton && signInPanel.checkFields() && signInPanel.checkSignIn()) {
             panel.remove(signInPanel);
             panel.remove(signUpPanel);
             panel.remove(flightsPanel);
-            panel.remove(seatsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             panel.add(homePanel, BorderLayout.CENTER);
             signInButton.setVisible(false);
             signUpButton1.setVisible(false);
@@ -190,14 +210,25 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(false);
             back1.setVisible(false);
             back2.setVisible(false);
-            home.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
             signInPanel.signIn();
+            updateUserPanel();
             signInPanel.clear();
+          }
+          else if(event.getSource() == signInButton && signInPanel.checkFields() == false){
+            JOptionPane.showMessageDialog(frame, "Please fill in the Username and Password fields.");
+          }
+          else if(event.getSource() == signInButton && signInPanel.checkSignIn() == false){
+            JOptionPane.showMessageDialog(frame, "That Username and Password do not exist.");
           }
           else if (event.getSource() == signUpButton1){
             panel.remove(signInPanel);
             panel.remove(flightsPanel);
-            panel.remove(seatsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             panel.remove(homePanel);
             panel.add(signUpPanel, BorderLayout.CENTER);
             signInButton.setVisible(false);
@@ -208,15 +239,18 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(false);
             back1.setVisible(false);
             back2.setVisible(false);
-            home.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
             signInPanel.clear();
           }
-          else if (event.getSource() == signUpButton2){
+          else if (event.getSource() == signUpButton2 && signUpPanel.checkFields()){
             panel.remove(signInPanel);
             panel.remove(signUpPanel);
             panel.remove(flightsPanel);
-            panel.remove(seatsPanel);
-            panel.add(homePanel, BorderLayout.CENTER);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             signInButton.setVisible(false);
             signUpButton1.setVisible(false);
             signUpButton2.setVisible(false);
@@ -225,15 +259,27 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(false);
             back1.setVisible(false);
             back2.setVisible(false);
-            home.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
+            quit.setVisible(false);
+            signUpPanel.createUser();
             signUpPanel.clear();
+            updateUserPanel();
+            panel.add(homePanel, BorderLayout.CENTER);
+          }
+          else if(event.getSource() == signUpButton2 && signUpPanel.checkFields() == false){
+            JOptionPane.showMessageDialog(frame, "Please fill in the First Name, Last Name, Username, and Password fields.");
           }
           else if (event.getSource() == signOutButton){
             panel.remove(signUpPanel);
             panel.remove(flightsPanel);
-            panel.remove(seatsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             panel.remove(homePanel);
             panel.add(signInPanel, BorderLayout.CENTER);
+            quit.setVisible(true);
             signInButton.setVisible(true);
             signUpButton1.setVisible(true);
             signUpButton2.setVisible(false);
@@ -242,12 +288,16 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(false);
             back1.setVisible(false);
             back2.setVisible(false);
-            home.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
           }
           else if(event.getSource() == flightsButton){
             panel.remove(signUpPanel);
             panel.remove(signInPanel);
-            panel.remove(seatsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             panel.remove(homePanel);
             signInButton.setVisible(false);
             signUpButton1.setVisible(false);
@@ -257,14 +307,19 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(true);
             back1.setVisible(true);
             back2.setVisible(false);
-            home.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
+            quit.setVisible(false);
             panel.add(flightsPanel, BorderLayout.CENTER);
           }
-          else if(event.getSource() == seatsButton){
+          else if(event.getSource() == seatsButton && (selectedFlight.getFlightID().equals(flight1.getFlightID()))){
             panel.remove(signUpPanel);
             panel.remove(signInPanel);
             panel.remove(flightsPanel);
             panel.remove(homePanel);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             signInButton.setVisible(false);
             signUpButton1.setVisible(false);
             signUpButton2.setVisible(false);
@@ -273,15 +328,61 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(false);
             back1.setVisible(false);
             back2.setVisible(true);
-            home.setVisible(true);
-            System.out.println(getSelectedFlight().getFlightID());
-            panel.add(seatsPanel, BorderLayout.CENTER);
+            home1.setVisible(true);
+            home2.setVisible(false);
+            home3.setVisible(false);
+            quit.setVisible(false);
+            panel.add(seatsPanel1, BorderLayout.CENTER);
           }
+          else if(event.getSource() == seatsButton && (selectedFlight.getFlightID().equals(flight2.getFlightID()))){
+            panel.remove(signUpPanel);
+            panel.remove(signInPanel);
+            panel.remove(flightsPanel);
+            panel.remove(homePanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel3);
+            signInButton.setVisible(false);
+            signUpButton1.setVisible(false);
+            signUpButton2.setVisible(false);
+            signOutButton.setVisible(false);
+            flightsButton.setVisible(false);
+            seatsButton.setVisible(false);
+            back1.setVisible(false);
+            back2.setVisible(true);
+            home1.setVisible(false);
+            home2.setVisible(true);
+            home3.setVisible(false);
+            quit.setVisible(false);
+            panel.add(seatsPanel2, BorderLayout.CENTER);
+          }      
+          else if(event.getSource() == seatsButton && (selectedFlight.getFlightID().equals(flight3.getFlightID()))){
+            panel.remove(signUpPanel);
+            panel.remove(signInPanel);
+            panel.remove(flightsPanel);
+            panel.remove(homePanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            signInButton.setVisible(false);
+            signUpButton1.setVisible(false);
+            signUpButton2.setVisible(false);
+            signOutButton.setVisible(false);
+            flightsButton.setVisible(false);
+            seatsButton.setVisible(false);
+            back1.setVisible(false);
+            back2.setVisible(true);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(true);
+            quit.setVisible(false);
+            panel.add(seatsPanel3, BorderLayout.CENTER);
+          } 
           else if(event.getSource() == back1){
             panel.remove(signUpPanel);
             panel.remove(signInPanel);
             panel.remove(flightsPanel);
-            panel.remove(seatsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             signInButton.setVisible(false);
             signUpButton1.setVisible(false);
             signUpButton2.setVisible(false);
@@ -290,14 +391,20 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(false);
             back1.setVisible(false);
             back2.setVisible(false);
-            home.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
+            quit.setVisible(false);
+            updateUserPanel();
             panel.add(homePanel, BorderLayout.CENTER);
           }
           else if(event.getSource() == back2){
             panel.remove(signUpPanel);
             panel.remove(signInPanel);
             panel.remove(homePanel);
-            panel.remove(seatsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             signInButton.setVisible(false);
             signUpButton1.setVisible(false);
             signUpButton2.setVisible(false);
@@ -306,14 +413,19 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(true);
             back1.setVisible(true);
             back2.setVisible(false);
-            home.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
+            quit.setVisible(false);
             panel.add(flightsPanel, BorderLayout.CENTER);
           }
-          else if(event.getSource() == home){
+          else if(event.getSource() == home1){
             panel.remove(signUpPanel);
             panel.remove(signInPanel);
             panel.remove(flightsPanel);
-            panel.remove(seatsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
             signInButton.setVisible(false);
             signUpButton1.setVisible(false);
             signUpButton2.setVisible(false);
@@ -322,36 +434,70 @@ public class SeatSelectFrame extends JFrame{
             seatsButton.setVisible(false);
             back1.setVisible(false);
             back2.setVisible(false);
-            home.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
+            quit.setVisible(false);
             panel.add(homePanel, BorderLayout.CENTER);
-            
-            seatsPanel.bookSeats();
-            seatsPanel.updatePanel();
-//            ArrayList<String> array = seatsPanel.getSelectedSeats();
-//            for(int i = 0; i < array.size(); i++){
-//               System.out.println(array.get(i));
-              //  Flight flight = getSelectedFlight();
-//                Seat seat = flight.getSeat(array.get(i));
-//                seat.book(currentUser.getUserID());
-//            }
-            
-            
-            
+            seatsPanel1.bookSeats();
+            seatsPanel1.updatePanel();
+            updateUserPanel();
           }
-          validate();
-          repaint();
-          
-
-          //String passwordInput = ""; 
-          
-          //userNameInput = userNameField.getText();
-          //passwordInput = passwordField.getText();
-          
-          //return;
+          else if(event.getSource() == home2){
+            panel.remove(signUpPanel);
+            panel.remove(signInPanel);
+            panel.remove(flightsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
+            signInButton.setVisible(false);
+            signUpButton1.setVisible(false);
+            signUpButton2.setVisible(false);
+            signOutButton.setVisible(true);
+            flightsButton.setVisible(true);
+            seatsButton.setVisible(false);
+            back1.setVisible(false);
+            back2.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
+            quit.setVisible(false);
+            panel.add(homePanel, BorderLayout.CENTER);
+            seatsPanel2.bookSeats();
+            seatsPanel2.updatePanel();
+            updateUserPanel();
+          }
+          else if(event.getSource() == home3){
+            panel.remove(signUpPanel);
+            panel.remove(signInPanel);
+            panel.remove(flightsPanel);
+            panel.remove(seatsPanel1);
+            panel.remove(seatsPanel2);
+            panel.remove(seatsPanel3);
+            signInButton.setVisible(false);
+            signUpButton1.setVisible(false);
+            signUpButton2.setVisible(false);
+            signOutButton.setVisible(true);
+            flightsButton.setVisible(true);
+            seatsButton.setVisible(false);
+            back1.setVisible(false);
+            back2.setVisible(false);
+            home1.setVisible(false);
+            home2.setVisible(false);
+            home3.setVisible(false);
+            quit.setVisible(false);
+            panel.add(homePanel, BorderLayout.CENTER);
+            seatsPanel3.bookSeats();
+            seatsPanel3.updatePanel();
+            updateUserPanel();
+          }
+          else if (event.getSource() == quit) {
+            System.exit(0);
+          }
+          panel.validate();
+          panel.repaint();
+          panel.revalidate();
         }
       }
 
 }
-///////////
-// Make button book seat using new method in SeatSelectFrame
-// Or add user to SeatSelectFrame usersArray using button

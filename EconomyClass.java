@@ -10,6 +10,7 @@ public class EconomyClass extends Seat {
     this.seatID = createSeatID(row, column);
     this.flightID = flightID;
     this.userID = "";
+    this.variety = "Economy Class";
   }
   
   public double calculatePrice(int row, int column){
@@ -76,6 +77,10 @@ public class EconomyClass extends Seat {
   
   public String getUserID(){
     return this.userID;
+  }
+  
+  public String getVariety(){
+    return this.variety;
   }
   
 }

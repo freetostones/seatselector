@@ -5,6 +5,7 @@ public abstract class Seat {
   protected String seatID;
   protected String flightID; 
   protected String userID;
+  protected String variety;
   
   public abstract double calculatePrice(int column, int row);
   public abstract double getPrice();
@@ -16,4 +17,5 @@ public abstract class Seat {
   public abstract String getSeatID();
   public abstract String getFlightID();
   public abstract String getUserID();
+  public abstract String getVariety();
 }

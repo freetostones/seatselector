@@ -7,7 +7,7 @@ import javax.swing.border.LineBorder;
 
 public class FlightsPanel extends JPanel
 {
-  private JLabel categoriesLabel; //flightIDLabel, departureLabel, destinationLabel, dateLabel, timeLabel;
+  private JLabel categoriesLabel;
   private JComboBox cBox;
   private SeatSelectFrame frame;
   
@@ -27,18 +27,10 @@ public class FlightsPanel extends JPanel
          if (e.getStateChange() == ItemEvent.SELECTED) {
            String[] stringArray = (String[]) cBox.getSelectedItem();
            selectFlight(stringArray[0]);
-           System.out.println(stringArray[0]);
-           
          }
        }
      });
-     
-      //flightIDLabel = new JLabel("FLIGHT ID");
-      //departureLabel = new JLabel("DEPARTURE");
-      //destinationLabel = new JLabel("DESTINATION");
-      //dateLabel = new JLabel("DATE");
-      //timeLabel = new JLabel("TIME");
- 
+
      categoriesLabel = new JLabel("FLIGHT ID        DEPARTURE    DESTINATION DATE             TIME                    ");
       
      positionConst.gridx = 0;
@@ -73,9 +65,7 @@ public class FlightsPanel extends JPanel
       frame.selectFlight(flightID);
       return;
    }
-   
-   
-   
+
 }
      
    class MyRenderer extends JPanel implements ListCellRenderer

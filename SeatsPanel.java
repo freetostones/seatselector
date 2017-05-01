@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class SeatsPanel extends JPanel
 {
    private SeatSelectFrame frame;
+
    public SeatsPanel(SeatSelectFrame frame)
    { 
       this.frame = frame;
@@ -18,23 +19,10 @@ public class SeatsPanel extends JPanel
       for(int i = 0; i < 8; i++){
          for(int j = 0; j < 6; j++)
          {
-            if(j > 2) { 
-               positionConst.gridx = j + 1;
-            }
-            else {
-               positionConst.gridx = j;
-            }
-            
-            if(i > 3) { 
-               positionConst.gridy = i + 1;
-            }
-            else {
-               positionConst.gridy = i;
-            }
-            
-            
-            positionConst.insets = new Insets(10, 10, 10, 10);
-            add(new JCheckBox(createSeatID(i,j)), positionConst);
+           positionConst.gridx = j;
+           positionConst.gridy = i;
+           positionConst.insets = new Insets(10, 10, 10, 10);
+           add(new JCheckBox(createSeatID(i,j)), positionConst);
          }
         }
       }
@@ -80,7 +68,9 @@ public class SeatsPanel extends JPanel
                     JCheckBox cb = (JCheckBox) components[i];
                     if (cb.isSelected()) {
                         frame.getSelectedFlight().getSeat(cb.getText()).book(frame.getCurrentUser().getUserID());
+                        frame.getCurrentUser().updateSeats(frame.getSelectedFlight().getSeat(cb.getText()));
                         cb.setEnabled(false);
+                        cb.setSelected(false);
                         }
                   }
                   return;
@@ -93,6 +83,7 @@ public class SeatsPanel extends JPanel
                     JCheckBox cb = (JCheckBox) components[i];
                     if (frame.getSelectedFlight().getSeat(cb.getText()).isBooked()) {
                         cb.setEnabled(false);
+                        cb.setSelected(false);
                     }
                   }
                   return;

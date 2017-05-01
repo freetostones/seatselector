@@ -20,6 +20,10 @@ public class User {
       this.seatsBooked++;
     }
     
+    public ArrayList<Seat> getBookedSeatsArray(){
+      return bookedSeatsArray;
+    }
+    
     public String getFirstName() {
       return this.firstName;
     }
@@ -36,11 +40,8 @@ public class User {
       return this.password;
     }
     
-    public void printSeats(){
-      for(int i = 0; i < this.bookedSeatsArray.size(); i++){
-        System.out.print(this.bookedSeatsArray.get(i).getSeatID() + " ");
-       }
-      System.out.print("\n");
-    } 
-  
+    public int getSeatsBooked() {
+      return this.seatsBooked;
+    }
+
 }
