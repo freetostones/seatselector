@@ -19,7 +19,7 @@ javac App.java
 to compile the files, and then 
 
 ```
-java App.java
+java App
 ```
 
 to run the project.
